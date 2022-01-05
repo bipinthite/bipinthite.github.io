@@ -11,14 +11,18 @@ When a network partition failure happens should we decide tos
 * Cancel the operation and thus decrease the availability but ensure consistency
 * Proceed with the operation and thus provide availability but risk inconsistency
 
-![CAP Theorem](.files/cap_thereom.png)
+![CAP Theorem](https://miro.medium.com/max/473/1*rxTP-_STj-QRDt1X9fdVlA.png)
+
 Image source: https://medium.com/system-design-blog/cap-theorem-1455ce5fc0a0
 
 The CAP theorem implies that in the presence of a network partition, one has to choose between consistency and availability. Note that consistency as defined in the CAP theorem is quite different from the consistency guaranteed in ACID database transactions.
 
 https://en.wikipedia.org/wiki/CAP_theorem
+
 https://www.ibm.com/cloud/learn/cap-theorem
+
 https://www.youtube.com/watch?v=k-Yaq8AHlFA
+
 https://www.cl.cam.ac.uk/research/dtg/www/files/publications/public/mk428/cap-critique.pdf
 
 ### CAP theorem NoSQL database types
@@ -50,7 +54,7 @@ Understanding the CAP theorem can help you choose the best database when designi
 ---
 
 ## SQL vs NoSQL
-|     | SQL | NoSQL |
+|| SQL | NoSQL |
 | --- | --- | ----- |
 | Pros | * Reduced data storage footprint due to normalization and other optimization opportunities. Often results in better performance and more efficient use of resources.<br>* Strong and well-understood data integrity semantics through ACID (Atomicity, Consistency, Isolation, Durability).<br>* Standard access to data via SQL.<br>* Generally more flexible query support capable of handling a broader range of workloads. SQL abstracts over the underlying implementation and allows the engine to optimize queries to fit their on-disk representation. | * Scalable and highly available—many NoSQL databases are generally designed to support seamless, online horizontal scalability without significant single points of failure.<br>* Flexible data models—most non-relational systems do not require developers to make up-front commitments to data models; what schemas do exist can often be changed on the fly.<br>* High performance—by limiting the range of what the database can do (for example, by relaxing durability guarantees) many NoSQL systems are able to achieve extremely high levels of performance.<br>*High-level data abstractions—moving beyond the "value in a cell" data model, NoSQL systems can provide high-level APIs for powerful data structures. Redis, for example, includes a native-sorted set abstraction |
 | Cons | * Rigid data models that require careful up-front design to ensure adequate performance and resist evolution—changing a schema will often include downtime<br>* Scaling horizontally is challenging—either completely unsupported, supported in an ad-hoc way, or only supported on relatively immature technologies<br>* Non-distributed engines are generally a "single point of failure" that must be mitigated by replication and failover techniques; no illusion of infinite scalability | * Vague interpretations of ACID constraints—despite widespread claims of ACID support for NoSQL systems, the interpretation of ACID is often made so broad that not much can be gleaned about the semantics of the database in question. For example, what does "isolation" mean without transactions?<br>* Distributed systems have distributed systems problems. While not unique to NoSQL systems, it's the norm, rather than the exception, for developers programming against NoSQL to deeply understand, e.g., CAP Theorem and its interpretation by the database in question.<br>* Lack of flexibility in access patterns—the relational/SQL abstraction gives the database engine broad powers to optimize queries for the underlying data; without that abstraction, the on-disk representation of data leaks into the application's queries and leaves no room for the engine to optimize.|
@@ -61,9 +65,9 @@ Understanding the CAP theorem can help you choose the best database when designi
 ## SaaS Application Architecture
 
 ### Multi-tenancy
-![Multi-tenancy](.files/aws-reinvent-2016-architecting-next-generation-saas-applications-on-aws-arc301-3-638.jpg)
+![Multi-tenancy](https://image.slidesharecdn.com/4004wed1130arc301-161228153341/95/aws-reinvent-2016-architecting-next-generation-saas-applications-on-aws-arc301-3-638.jpg?cb=1482939294)
 
-![](.files/aws-reinvent-2016-architecting-next-generation-saas-applications-on-aws-arc301-4-638.jpg)
+![](https://image.slidesharecdn.com/4004wed1130arc301-161228153341/95/aws-reinvent-2016-architecting-next-generation-saas-applications-on-aws-arc301-4-638.jpg?cb=1482939294)
 
 Images source: https://www.slideshare.net/AmazonWebServices/aws-reinvent-2016-architecting-next-generation-saas-applications-on-aws-arc301
 
@@ -100,18 +104,18 @@ The Command and Query Responsibility Segregation (CQRS) pattern separates read a
 * __Simpler queries__: By storing a materialized view in the read database, the application can avoid complex joins when querying.
 
 #### CQRS with Event Sourcing
-https://dzone.com/articles/microservices-with-cqrs-and-event-sourcing
+[Reference](https://dzone.com/articles/microservices-with-cqrs-and-event-sourcing)
 
 ![Microservice with CQRS and Event Sourcing](https://dzone.com/storage/temp/11241417-figure4.png)
 
 ### Design Principles
 
 #### The Twelve-Factor App
-* https://12factor.net/
-* https://www.nginx.com/blog/microservices-reference-architecture-nginx-twelve-factor-app/
+* [The Twelve-Factor App](https://12factor.net/)
+* [MRA, Part 5: Adapting the Twelve‑Factor App for Microservices](https://www.nginx.com/blog/microservices-reference-architecture-nginx-twelve-factor-app/)
 
 #### IDEALS
-https://www.infoq.com/articles/microservices-design-ideals/
+[Reference](https://www.infoq.com/articles/microservices-design-ideals/)
 
 * __Interface segregation__ - different types of clients (e.g., mobile apps, web apps, CLI programs) should be able to interact with services through the contract that best suits their needs.
 * __Deployability__ - in the microservice era, which is also the DevOps era, there are critical design decisions and technology choices developers need to make regarding packaging, deploying and running microservices.
